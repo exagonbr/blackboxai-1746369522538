@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroSense AI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">AgroSense AI</div>
+            <nav>
+                <ul>
+                    <li class="active"><a href="#">Dashboard</a></li>
+                    <li><a href="#">Sensors</a></li>
+                    <li><a href="#">Alerts</a></li>
+                    <li><a href="#">Reports</a></li>
+                    <li><a href="#">Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <main class="main-content">
+            <header class="header">
+                <h1>Farm Dashboard</h1>
+                <div class="user-profile">User</div>
+            </header>
+            
+            <div class="dashboard-grid">
+                <div class="card sensor-card">
+                    <h3>Temperature</h3>
+                    <div class="sensor-value" data-sensor="temperature">--°C</div>
+                </div>
+                <div class="card sensor-card">
+                    <h3>Humidity</h3>
+                    <div class="sensor-value" data-sensor="humidity">--%</div>
+                </div>
+                <div class="card sensor-card">
+                    <h3>Soil Moisture</h3>
+                    <div class="sensor-value" data-sensor="soilMoisture">--%</div>
+                </div>
+                <div class="card sensor-card">
+                    <h3>Light Intensity</h3>
+                    <div class="sensor-value" data-sensor="lightIntensity">--lux</div>
+                </div>
+                <div class="card health-indicator">
+                    <h3>Farm Health Status</h3>
+                    <div class="status good">Good</div>
+                </div>
+                <div class="card alerts">
+                    <h3>Alerts</h3>
+                    <div class="alerts-container"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
