@@ -24,37 +24,41 @@ function updateDashboard() {
 // Display alerts
 function updateAlerts() {
     const alertsContainer = document.querySelector('.alerts-container');
-    alertsContainer.innerHTML = '';
-    
-    const alerts = generateAlerts();
-    
-    if (alerts.length === 0) {
-        alertsContainer.innerHTML = '<div class="no-alerts">No active alerts</div>';
-    } else {
-        alerts.forEach(alert => {
-            const alertElement = document.createElement('div');
-            alertElement.textContent = alert;
-            alertsContainer.appendChild(alertElement);
-        });
+    if (alertsContainer) {
+        alertsContainer.innerHTML = '';
+        
+        const alerts = generateAlerts();
+        
+        if (alerts.length === 0) {
+            alertsContainer.innerHTML = '<div class="no-alerts">No active alerts</div>';
+        } else {
+            alerts.forEach(alert => {
+                const alertElement = document.createElement('div');
+                alertElement.textContent = alert;
+                alertsContainer.appendChild(alertElement);
+            });
+        }
     }
 }
 
 // Determine farm health status
 function updateHealthStatus() {
     const healthIndicator = document.querySelector('.health-indicator .status');
-    let status = 'good';
-    let statusText = 'Good';
+    if (healthIndicator) {
+        let status = 'good';
+        let statusText = 'Good';
 
-    if (sensorData.temperature > 30 || sensorData.temperature < 15) {
-        status = 'warning';
-        statusText = 'Warning';
-    } else if (sensorData.soilMoisture < 30) {
-        status = 'average';
-        statusText = 'Needs Attention';
+        if (sensorData.temperature > 30 || sensorData.temperature < 15) {
+            status = 'warning';
+            statusText = 'Warning';
+        } else if (sensorData.soilMoisture < 30) {
+            status = 'average';
+            statusText = 'Needs Attention';
+        }
+
+        healthIndicator.className = status;
+        healthIndicator.textContent = statusText;
     }
-
-    healthIndicator.className = status;
-    healthIndicator.textContent = statusText;
 }
 
 // Generate mock alerts
